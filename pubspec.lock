@@ -360,6 +360,22 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  fquery:
+    dependency: "direct main"
+    description:
+      name: fquery
+      sha256: "87acc81c4d8a0874934b0cc09a0272992c2f5fd1534241a01adc0f9a48fb8a63"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.5.4-beta.2"
+  freezed:
+    dependency: transitive
+    description:
+      name: freezed
+      sha256: "6022db4c7bfa626841b2a10f34dd1e1b68e8f8f9650db6112dcdeeca45ca793c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.6"
   freezed_annotation:
     dependency: transitive
     description:
