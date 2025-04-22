@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/store/counter.dart';
+import 'package:flutter_application_1/components/counter.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-final counterProvider = StateProvider((ref) => 1);
 
 class Page2 extends ConsumerWidget {
   const Page2({super.key});
@@ -19,6 +19,7 @@ class Page2 extends ConsumerWidget {
                 () => ref.read(counterProvider.notifier).state++,
             child: const Text('button'),
           ),
+          Counter()
         ],
       ),
     );
