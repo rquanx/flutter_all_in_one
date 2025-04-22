@@ -8,18 +8,19 @@ class Page2 extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final x = ref.watch(counterProvider);
+    final counterStore = useCounterStore(ref);
     return Scaffold(
       appBar: AppBar(title: const Text('Page 2')),
       body: Column(
         children: [
-          Text(x.toString()),
+          Text(counterStore.state.count.toString()),
           ElevatedButton(
             onPressed:
-                () => ref.read(counterProvider.notifier).state++,
+                () =>
+                    counterStore.update((s) => s.copyWith(count: s.count + 1)),
             child: const Text('button'),
           ),
-          Counter()
+          Counter(),
         ],
       ),
     );

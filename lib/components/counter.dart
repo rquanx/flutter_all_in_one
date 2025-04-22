@@ -14,15 +14,19 @@ class Counter extends HookConsumerWidget {
 
     final funHook = useLoggedState(2);
     final classHook = useTimeAlive();
-    final x = ref.watch(counterProvider);
-
+    final counterStore = useCounterStore(ref);
     return Column(
       children: [
-        Text(x.toString()),
+        Text(counterStore.state.count.toString()),
         Text('value: ${funHook.value}'),
         Text('classHook: ${classHook.toString()}'),
         ElevatedButton(
-          onPressed: () => ref.read(counterProvider.notifier).state++,
+          // onPressed: () => counterStore.state().count++,
+          onPressed: () {
+            counterStore.update(
+              (state) => state.copyWith(count: state.count + 1),
+            );
+          },
           child: const Text('button'),
         ),
         ElevatedButton(
