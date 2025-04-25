@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/counter.dart';
+import 'package:flutter_application_1/pages/scroll.dart';
 import 'package:flutter_application_1/pages/webview.dart';
 import 'package:go_router/go_router.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
@@ -46,13 +48,18 @@ final router = GoRouter(
               builder:
                   (context, state) =>
                       const MyHomePage(title: 'Flutter Demo Home Page'),
-              // routes: [
-              //   GoRoute(
-              //     path: "detail",
-              //     builder:
-              //         (context, state) => const MainScreen2(useRouter: true),
-              //   ),
-              // ],
+              routes: [
+                GoRoute(
+                  path: "counter",
+                  builder:
+                      (context, state) => const CounterPage(title: 'counter'),
+                ),
+                GoRoute(
+                  path: "scroll",
+                  builder:
+                      (context, state) => const ScrollPage(title: 'scroll'),
+                ),
+              ],
             ),
           ],
         ),
@@ -74,53 +81,13 @@ final router = GoRouter(
               path: "/settings",
               builder:
                   (context, state) =>
-                      // for localhost
-                      //  const WebViewComponent(url: "http://10.0.2.2:5500/test/test.html"),
-                     const WebViewComponent(url: "https://www.baidu.com"),
+                  // for localhost
+                  //  const WebViewComponent(url: "http://10.0.2.2:5500/test/test.html"),
+                  const WebViewComponent(url: "https://www.baidu.com"),
             ),
           ],
         ),
       ],
     ),
-
-    // ShellRoute(
-    //   navigatorKey: _shellNavigatorKey,
-    //   builder:
-    //       (context, state, child) => Scaffold(
-    //         body: child, // Dynamic content based on the active route
-    //         bottomNavigationBar: BottomNavigationBar(
-    //           onTap: (index) {
-    //             if (index == 0) context.go('/');
-    //             if (index == 1) context.go('/page2');
-    //             if (index == 2) context.go('/webview');
-    //           },
-    //           items: const [
-    //             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-    //             BottomNavigationBarItem(
-    //               icon: Icon(Icons.settings),
-    //               label: 'Settings',
-    //             ),
-    //             BottomNavigationBarItem(
-    //               icon: Icon(Icons.web),
-    //               label: 'webview',
-    //             ),
-    //           ],
-    //         ),
-    //       ),
-    //   routes: [
-    //     GoRoute(
-    //       path: '/',
-    //       builder:
-    //           (context, state) =>
-    //               const MyHomePage(title: 'Flutter Demo Home Page'),
-    //     ),
-    //     GoRoute(path: '/page2', builder: (context, state) => const Page2()),
-    //     GoRoute(
-    //       path: '/webview',
-    //       builder:
-    //           (context, state) => const WebViewComponent(url: "https://www.baidu.com"),
-    //     ),
-    //   ],
-    // ),
   ],
 );

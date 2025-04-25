@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fquery/fquery.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -30,14 +31,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return OKToast(
-      child: MaterialApp.router(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        ),
-        routerConfig: router,
-      ),
+    return ScreenUtilInit(
+      designSize: const Size(375, 750),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return OKToast(
+          child: MaterialApp.router(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            ),
+            routerConfig: router,
+          ),
+        );
+      },
     );
   }
 }

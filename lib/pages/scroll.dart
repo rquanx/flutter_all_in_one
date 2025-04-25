@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class ScrollPage extends StatefulWidget {
+  const ScrollPage({super.key, required this.title});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -15,10 +16,10 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<ScrollPage> createState() => _ScrollPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _ScrollPageState extends State<ScrollPage> {
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -38,7 +39,35 @@ class _MyHomePageState extends State<MyHomePage> {
           // the App.build method, and use it to set our appbar title.
           title: Text(widget.title),
         ),
-        body: Text('data'),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text('You have pushed the button this many times:'),
+
+                // 添加更多内容以演示滚动效果
+                Container(
+                  height: 2000, // 增加高度以演示滚动
+                  color: Colors.blue.withOpacity(0.1),
+                  child: Center(child: Text('更多内容区域')),
+                ),
+                Container(
+                  height: 10, // 增加高度以演示滚动
+                  color: Colors.red,
+                  child: Center(child: Text('更多内容区域')),
+                ),
+              ],
+            ),
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            context.go("/counter");
+          },
+          tooltip: 'counter',
+          child: const Icon(Icons.accessible_forward),
+        ), // This trailing comma makes auto-formatting nicer for build methods.
       ),
     );
   }
