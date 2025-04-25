@@ -40,7 +40,7 @@ class JSBridge {
   ///   (defaults to 'assets/js/flutter-bridge-sdk.iife.js').
   JSBridge({
     required WebViewController controller,
-    String bridgeChannelName = 'Bridge',
+    String bridgeChannelName = 'client_to_native_channel',
     String innerChannelName = 'native_to_client_channel',
     String jsSdkAssetPath = 'assets/js/flutter-bridge-sdk.iife.js', // Default path
   })  : _controller = controller,
@@ -83,15 +83,13 @@ class JSBridge {
   }
 
   /// Loads and injects the JS Bridge SDK script into the WebView.
-  ///
+  /// Injects the SDK from native, it is not need to call this method in most cases.
   /// **Call this method from your WebView's `onPageFinished` callback.**
   Future<void> injectSdk() async {
     try {
       final sdkScript = await rootBundle.loadString(_jsSdkAssetPath);
       await _controller.runJavaScript(sdkScript);
       debugPrint('JSBridge: SDK injected successfully from $_jsSdkAssetPath.');
-      // Optional: Call JS initialize if needed
-      // await _controller.runJavaScript('window.FlutterBridge?.initialize();');
     } catch (e) {
       debugPrint('JSBridge: Error loading or injecting SDK from $_jsSdkAssetPath: $e');
       // Consider throwing or notifying an error stream
@@ -113,8 +111,8 @@ class JSBridge {
 
     // Ensure the FlutterBridge instance and dispatch method exist before calling
     final script = """
-      if (window.FlutterBridge && typeof window.FlutterBridge.dispatch === 'function') {
-        window.FlutterBridge.dispatch('$escapedJsonPayload');
+      if (window.flutterBridge && typeof window.flutterBridge.dispatch === 'function') {
+        window.flutterBridge.dispatch('$escapedJsonPayload');
       } else {
         console.error('FlutterBridge SDK or dispatch method not found when trying to send message: ${payload.action}/${payload.id}');
       }
