@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utils/js_bridget/bridge.dart';
@@ -62,6 +63,9 @@ class _WebViewComponentState extends State<WebViewComponent> {
     debugPrint(
       'Received JS Request: action=${payload.action}, id=${payload.id}, data=${payload.data}',
     );
+    if (payload.action == 'clientToNative') {
+      jsBridge?.sendResponse(payload.id, {"count": Random().nextInt(1000)});
+    }
     // IMPORTANT: Check if page is finished before processing if needed
     // if (!_isPageFinished) return;
 
@@ -108,7 +112,25 @@ class _WebViewComponentState extends State<WebViewComponent> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: WebViewWidget(controller: controller));
+    return Scaffold(
+      body: Column(
+        children: [
+          Container(
+            constraints: BoxConstraints(maxHeight: 700),
+            child: WebViewWidget(controller: controller),
+          ),
+          ElevatedButton(
+            onPressed:
+                () => {
+                  jsBridge?.sendEvent('nativeToClient', {
+                    "count": Random().nextDouble() * Random().nextInt(100),
+                  }),
+                },
+            child: const Text('native to client'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override

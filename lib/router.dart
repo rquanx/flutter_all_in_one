@@ -74,7 +74,9 @@ final router = GoRouter(
               path: "/settings",
               builder:
                   (context, state) =>
-                      const WebViewComponent(url: "https://www.baidu.com"),
+                      // for localhost
+                      //  const WebViewComponent(url: "http://10.0.2.2:5500/test/test.html"),
+                     const WebViewComponent(url: "https://www.baidu.com"),
             ),
           ],
         ),
