@@ -2,7 +2,10 @@
     <application
         android:label="flutter_application_1"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true"
+        >
+         <!-- usesCleartextTraffic: allow load http html -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
