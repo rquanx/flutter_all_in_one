@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/components/graphx.dart';
 import 'package:flutter_application_1/pages/counter.dart';
 import 'package:flutter_application_1/pages/scroll.dart';
 import 'package:flutter_application_1/pages/webview.dart';
@@ -23,8 +24,8 @@ final router = GoRouter(
               ),
               PersistentRouterTabConfig(
                 item: ItemConfig(
-                  icon: const Icon(Icons.message),
-                  title: "Messages",
+                  icon: const Icon(Icons.draw_sharp),
+                  title: "Graphx",
                 ),
               ),
               PersistentRouterTabConfig(
@@ -65,11 +66,20 @@ final router = GoRouter(
         ),
 
         // The route branch for 2nd Tab
+        // StatefulShellBranch(
+        //   routes: <RouteBase>[
+        //     GoRoute(
+        //       path: "/messages",
+        //       builder: (context, state) => const Page2(),
+        //     ),
+        //   ],
+        // ),
+
         StatefulShellBranch(
           routes: <RouteBase>[
             GoRoute(
-              path: "/messages",
-              builder: (context, state) => const Page2(),
+              path: "/graphx",
+              builder: (context, state) => const Graphx(),
             ),
           ],
         ),
