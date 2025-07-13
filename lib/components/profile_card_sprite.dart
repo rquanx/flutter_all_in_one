@@ -178,6 +178,7 @@ class ProfileCardSprite extends GSprite {
       options.nameRadius,
     );
     nameBg.graphics.endFill();
+    nameBg.alpha = 0.5;
     group.addChild(nameBg);
 
     group.addChild(nameText);
